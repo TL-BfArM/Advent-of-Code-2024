@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+
+    <script>
+        function handleInput(event) {
+            console.log('hello')
+            event.preventDefault()
+
+            const list = []
+            let numberSafeReports = 0
+
+            document.getElementById('input').value.split('\n').forEach(line => {
+                list.push(line.split(' '))
+            })
+
+            console.log(list)
+
+            list.forEach(item => {
+                const listIsIncreasing = (item[0] - item[1]) < 0
+                let isSafe = true
+                item.forEach((subItem, index) => {
+                    const nextItem = item[index + 1] ?? false
+                    if (nextItem === false || isSafe === false) {
+                        return
+                    }
+
+                    const absolute = Math.abs(subItem - item[index + 1])
+                    if (absolute < 1 || absolute > 3 || (listIsIncreasing !== (subItem - item[index + 1]) < 0)) {
+                        isSafe = false
+                        return
+                    }
+                })
+
+                if (isSafe === true) {
+                    numberSafeReports++
+                }
+            })
+
+            document.write(numberSafeReports)
+
+            return false
+        }
+    </script>
+
+    <form action="" onsubmit="return handleInput(event)" method="post">
+        <textarea name="input" id="input"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>

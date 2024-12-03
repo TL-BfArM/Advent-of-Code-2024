@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+
+    <script>
+        function handleInput() {
+            const list1 = [], list2 = []
+            let similarityScore = 0
+
+            document.getElementById('input').value.split('\n').forEach(line => {
+                list1.push(line.split('   ')[0])
+                list2.push(line.split('   ')[1])
+            })
+
+
+            list1.forEach((item, index) => {
+                similarityScore += item * (list2.filter(x => x === item).length)
+            })
+
+            document.write(similarityScore)
+        }
+    </script>
+
+    <form action="" onsubmit="handleInput()">
+        <textarea name="input" id="input"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
